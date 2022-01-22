@@ -27,6 +27,19 @@ class laptop implements Comparable<laptop>{
 		}
 	}
 }
+class cmp implements Comparator<laptop>{
+	public int compare(laptop l1,laptop l2){
+		if(l1.cost<l2.cost) {
+			return 1;
+		}
+		if(l2.cost<l1.cost) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
+	}
+}
 public class stream {
 	public static void main(String args[]) {
 		ArrayList<laptop> al=new ArrayList<laptop>();
@@ -85,6 +98,12 @@ public class stream {
 		System.out.println("Three cheapest laptops");
 		List<laptop> ob6=al.stream().limit(3).sorted((lp1,lp2)->lp1.compareTo(lp2)).collect(Collectors.toList());
 		for(laptop l: ob6) {
+			System.out.println(l.name+l.model+l.cost);
+		}
+		//print the 3 costliest laptops(can use collections.reverseorder)
+		System.out.println("Three costliest laptops");
+		List<laptop> ob7=al.stream().limit(3).sorted((lpc1,lpc2)->cmpobj.compare(lpc1, lpc2)).collect(Collectors.toList());
+		for(laptop l: ob7) {
 			System.out.println(l.name+l.model+l.cost);
 		}
 		//Print list of companies whose brands are available

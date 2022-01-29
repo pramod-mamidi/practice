@@ -35,14 +35,14 @@ router.post("/delete",async (req,res)=>{
 router.post("/replace",async (req,res)=>{
     const data=req.body
     cond=data.rep
-    const new_obj= new User({
+    const new_obj={
         email:data.email,
         password:data.password,
         mobile:data.mobile,
         country:data.country,
         area:data.area,
         pincode:data.pincode,
-    })
+    }
     const result=await User.findOneAndReplace({email:cond},new_obj,{upsert:true})
     res.send("sucessfully replaced")
 })
